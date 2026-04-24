@@ -1,8 +1,8 @@
 package logica;
 
 import java.time.LocalDateTime;
-import java.util.List;
 import java.util.ArrayList;
+import java.util.List;
 
 public class Publicacion {
 
@@ -12,7 +12,7 @@ public class Publicacion {
 	private String texto;
 	private String autor;
 	private LocalDateTime fechaPublicacion;
-	private List<String> Comentarios;
+	private List<Comentario> Comentarios;
 	
 	public Publicacion(String titulo, String texto, String autor) {
 		this.codigo = consecutivo;
@@ -58,7 +58,7 @@ public class Publicacion {
 		return fechaPublicacion;
 	}
 
-	public List<String> getComentarios() {
+	public List<Comentario> getComentarios() {
 		return Comentarios;
 	}
 }
