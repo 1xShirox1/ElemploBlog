@@ -20,7 +20,7 @@ public class Blog {
 	
 	
 	public Blog(String nombre, String descripcion) throws Exception {
-		if (nombre == "") {
+		if (nombre == null || nombre.trim().isEmpty()) {
 			throw new Exception("El blog debe de tener un nombre");
 		}
 		codigo = consecutivo;
@@ -36,37 +36,27 @@ public class Blog {
 		publicaciones.put(nuevaPublicacion.getCodigo(), nuevaPublicacion);
 	}
 	
-	public void borrarPublicacion(int codigo) {
+	public void borrarPublicacion(int codigo) throws Exception {
+		if (codigo <= 0) {
+			throw new Exception("Código de publicación inválido");
+		}
+		if (!publicaciones.containsKey(codigo)) {
+			throw new Exception("No existe una publicación con ese código");
+		}
 		publicaciones.remove(codigo);
 	}
 	
 	public List<Publicacion> listarPublicaciones() {
 	    return new ArrayList<>(publicaciones.values());
 	}
-
-	public Publicacion obtenerPublicacion(int codigo) {
-	    return publicaciones.get(codigo);
-	}
 	
 	public void crearComentario(int codigoPublicacion, String email, String ip, String texto) throws Exception {
-	    Publicacion publicacion = publicaciones.get(codigoPublicacion);
-
-	    if (publicacion == null) {
-	        throw new Exception("No existe una publicación con ese código");
-	    }
-
-	    publicacion.agregarComentario(email, ip, texto);
+	    		if (!publicaciones.containsKey(codigoPublicacion)) {
+			throw new Exception("No existe una publicación con ese código");
+		}
+		Publicacion publicacion = publicaciones.get(codigoPublicacion);
+		publicacion.agregarComentario(email, ip, texto);	    
 	}
-
-	public static int getConsecutivo() {
-		return consecutivo;
-	}
-
-
-	public static void setConsecutivo(int consecutivo) {
-		Blog.consecutivo = consecutivo;
-	}
-
 
 	public String getNombre() {
 		return nombre;
@@ -95,14 +85,6 @@ public class Blog {
 
 	public LocalDateTime getFechaCreacion() {
 		return fechaCreacion;
-	}
-
-
-	public Map<Integer, Publicacion> getPublicaciones() {
-		return publicaciones;
-	}
-	
-	
-	
+	}	
 }
 	
