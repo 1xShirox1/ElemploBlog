@@ -4,15 +4,12 @@ import java.time.LocalDateTime;
 
 public class Comentario {
 	
-	private static int consecutivo = 1;
-	private int codigo;
 	private LocalDateTime fechaCreacion;
 	private String email;
 	private String ip;
 	private String texto;
 	
 	public Comentario(String email, String ip, String texto) {
-		this.codigo = consecutivo;
 		this.email = email;
 		this.ip = ip;
 		this.texto = texto;
@@ -43,18 +40,13 @@ public class Comentario {
 		this.texto = texto;
 	}
 
-	public int getCodigo() {
-		return codigo;
-	}
-
 	public LocalDateTime getFechaCreacion() {
 		return fechaCreacion;
 	}
 	
 	@Override
 	public String toString() {
-	    return "Comentario: " + codigo +
-	            ", fechaCreacion=" + fechaCreacion +
+	    return "Comentario: fechaCreacion=" + fechaCreacion +
 	            ", email='" + email + '\'' +
 	            ", ip='" + ip + '\'' +
 	            ", texto='" + texto + '\'';
